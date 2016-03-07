@@ -5,6 +5,8 @@
  */
 package rollinetude2;
 
+import java.util.Random;
+
 /**
  *
  * @author James
@@ -16,6 +18,29 @@ public class RollinEtude2 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        int numSteps = 0;
+        int replaceIndex = -1;
+        int [] dice = new int [6];       
+        Random rn = new Random();
+        
+        for(int i = 0; i < dice.length; i++){
+            dice[i] = rn.nextInt(6-1 +1)+1;
+        }
+              
+        TeamJAPRollin tjr = new TeamJAPRollin(dice);
+        
+        dice = tjr.getDice();
+//        while (!tjr.isComplete()) {
+//            numSteps++;
+//            int roll = rn.nextInt(6-1 +1)+1;
+//            replaceIndex = tjr.handleRoll(roll);            
+//        }
+        int roll = rn.nextInt(6-1 +1)+1;
+        replaceIndex = tjr.handleRoll(roll);            
+
+        for(int d : dice){
+        System.out.println(d);
+        }
     }
     
 }
