@@ -60,16 +60,49 @@ public class TeamJAPRollin extends Rollin {
     @Override
     public int handleRoll(int roll) {
 
-        boolean[][] completeSet = new boolean[9][2];
+        boolean[][] completeRow = new boolean[9][2];
+        int [] incompleteSet = new int[3];
+        int [] completeSet = new int[3];
+        int row = 0;
+        int col = 0;
 
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 2; j++) {
                 
-                completeSet[i][j] = isSet(setIndices[i][j]);
-                System.out.print(completeSet[i][j]);
+                completeRow[i][j] = isSet(setIndices[i][j]);
+                System.out.print(completeRow[i][j]);
             }
             System.out.println();
         }
+        
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 2; j++) {
+                if (completeRow[i][j]) {
+                    row = i;                }
+            }
+        }
+        
+        if (completeRow[row][0]) {
+            col = 1;
+            completeSet = setIndices[row][0];
+            incompleteSet = setIndices[row][1];
+        } else {
+            col = 0;
+            completeSet = setIndices[row][1];
+            incompleteSet = setIndices[row][0];
+        }
+        
+        System.out.println("row: " + row + ", Incomplete col: " + col);
+        System.out.print("Complete set: ");
+        for (int i : completeSet) {
+            System.out.print(i + " ");
+        }
+        System.out.print("Incomplete set: ");
+        
+        for (int i : incompleteSet) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
 
         return 0;
     }
