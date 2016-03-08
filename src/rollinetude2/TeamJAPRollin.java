@@ -168,4 +168,32 @@ public class TeamJAPRollin extends Rollin {
     private int twoOfAKind(int roll, int[]inCompleteSet, int[] count) {
         return -1;
     }
+    
+    private boolean isSetOfTwo(int[] indices) {
+        // First just get the values at those indices to save typing.
+        boolean tOrF = false;
+        int a = dice[indices[0]];
+        int b = dice[indices[1]];
+        int c = dice[indices[2]];
+        // All three dice the same is a set - not needed for this code
+        /*
+        if (a == b && b == c) {
+            return true;
+        }
+        */
+        // If not all three are the same, then any two the same is not a set
+        if (a == b || a == c || b == c) {
+            System.out.println("two sets the same");
+            tOrF = true;
+        }
+        /*
+        // If all three are different and largest minus smallest is 2 then it
+        // is a set, otherwise not.
+        int max = Math.max(a, Math.max(b, c));
+        int min = Math.min(a, Math.min(b, c));
+        return max - min == 2;
+        */
+        
+        return tOrF;
+    }
 }
