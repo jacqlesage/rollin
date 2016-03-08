@@ -102,7 +102,6 @@ public class TeamJAPRollin extends Rollin {
         int incompleteCol = 0;
         int[] count = new int[7];
      
-        System.out.println("Roll " + roll);
         // find which rows have sets
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 2; j++) {
@@ -127,7 +126,7 @@ public class TeamJAPRollin extends Rollin {
             incompleteCol = 1;
             completeSet = setIndices[row][0];
             incompleteSet = setIndices[row][1];
-        } else {
+        } else if (completeRow[row][1]){
             incompleteCol = 0;
             completeSet = setIndices[row][1];
             incompleteSet = setIndices[row][0];
@@ -198,10 +197,6 @@ public class TeamJAPRollin extends Rollin {
                 }
             }     
             return -1;
-    }
-    
-    private int twoOfAKind(int roll, int[]inCompleteSet, int[] count) {
-        return -1;
     }
     
     private int run(int roll, int[]inCompleteSet, int[] count) {
