@@ -35,9 +35,20 @@ public class RollinEtude2 {
 //            int roll = rn.nextInt(6-1 +1)+1;
 //            replaceIndex = tjr.handleRoll(roll);            
 //        }
+
+        for(int d : dice){
+        System.out.println(d);
+        }
+        
         int roll = rn.nextInt(6-1 +1)+1;
+
         replaceIndex = tjr.handleRoll(roll);            
          
+
+        replaceIndex = tjr.handleRoll(roll);
+        System.out.println("replace index: " + replaceIndex);
+
+
         for(int d : dice){
         System.out.println(d);
         }

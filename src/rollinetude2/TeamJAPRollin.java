@@ -58,6 +58,33 @@ public class TeamJAPRollin extends Rollin {
         int min = Math.min(a, Math.min(b, c));
         return max - min == 2;
     }
+    
+        /**
+     * Determine whether the dice at a given triple of indices form a set.
+     *
+     * @param indices the indices
+     * @return true if the dice at those indices form a set, false otherwise.
+     */
+    private boolean isSet(int[] indices, int[] values) {
+        // First just get the values at those indices to save typing.
+        int a = values[0];
+        int b = values[1];
+        int c = values[2];
+        // All three dice the same is a set
+        if (a == b && b == c) {
+            return true;
+        }
+        // If not all three are the same, then any two the same is not a set
+        if (a == b || a == c || b == c) {
+            return false;
+        }
+
+        // If all three are different and largest minus smallest is 2 then it
+        // is a set, otherwise not.
+        int max = Math.max(a, Math.max(b, c));
+        int min = Math.min(a, Math.min(b, c));
+        return max - min == 2;
+    }
 
     /**
      * Make change in dice in method
@@ -107,6 +134,7 @@ public class TeamJAPRollin extends Rollin {
         }
 
         // test print statements
+        System.out.println("roll: " + roll);
         System.out.println("row: " + row + ", Incomplete col: " + incompleteCol);
         System.out.print("Complete set: ");
         for (int i : completeSet) {
@@ -145,7 +173,7 @@ public class TeamJAPRollin extends Rollin {
 //            return closeEndedCase(roll, incompleteSet, count);
 //        }
 
-        return 0;
+        return -1;
     }
 
     private int closeEndedCase(int roll, int[] incompleteSet, int[] count) {
@@ -155,24 +183,34 @@ public class TeamJAPRollin extends Rollin {
                 tempArray[1] = dice[incompleteSet[1]];
                 tempArray[2] = dice[incompleteSet[2]];
                 tempArray[i] = roll;
-                if (isSet(tempArray)) {
+                if (isSet(incompleteSet, tempArray)) {
                     dice[incompleteSet[i]] = roll;
                     return incompleteSet[i];
                 }
             }
             for (int i = 0; i < 3; i++) {
-                if (dice[incompleteSet[i]] == 1) {
+                if (dice[incompleteSet[i]] == 1 && roll != 6) {
                     dice[incompleteSet[i]] = roll;
                     return incompleteSet[i];
-                } else if (dice[incompleteSet[i]] == 6) {
+                } else if (dice[incompleteSet[i]] == 6 && roll != 1) {
                     dice[incompleteSet[i]] = roll;
                     return incompleteSet[i];
                 }
             }     
-        return -1;
+            return -1;
     }
     
     private int twoOfAKind(int roll, int[]inCompleteSet, int[] count) {
+        return -1;
+    }
+    
+    private int run(int roll, int[]inCompleteSet, int[] count) {
+        int a = dice[inCompleteSet[0]];
+        int b = dice[inCompleteSet[1]];
+        int c = dice[inCompleteSet[2]];
+        
+        int max = Math.max(a, Math.max(b, c));
+        int min = Math.min(a, Math.min(b, c));
         return -1;
     }
     
