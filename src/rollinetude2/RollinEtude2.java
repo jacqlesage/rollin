@@ -40,9 +40,11 @@ public class RollinEtude2 {
         System.out.println(d);
         }
         
-        int roll = rn.nextInt(6-1 +1)+1;
+        int roll = rn.nextInt(6-1 +1)+1;        
+         
         replaceIndex = tjr.handleRoll(roll);
         System.out.println("replace index: " + replaceIndex);
+
 
         for(int d : dice){
         System.out.println(d);
