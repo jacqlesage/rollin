@@ -57,24 +57,31 @@ public class TeamJAPRollin extends Rollin {
         return max - min == 2;
     }
     
+    /**
+     * Make change in dice in method
+     * @param roll
+     * @return 
+     */
     @Override
     public int handleRoll(int roll) {
-
+        // declare variables
         boolean[][] completeRow = new boolean[9][2];
         int [] incompleteSet = new int[3];
         int [] completeSet = new int[3];
         int row = 0;
-        int col = 0;
+        int incompleteCol = 0;
+        int [] count = new int[7];
 
+        // find which rows have sets
         for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 2; j++) {
-                
+            for (int j = 0; j < 2; j++) { 
                 completeRow[i][j] = isSet(setIndices[i][j]);
                 System.out.print(completeRow[i][j]);
             }
             System.out.println();
         }
         
+        // store last row with set in row
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 2; j++) {
                 if (completeRow[i][j]) {
@@ -82,17 +89,20 @@ public class TeamJAPRollin extends Rollin {
             }
         }
         
+        // determine which column has incomplete row
+        // initialise incomplete and complete set indices
         if (completeRow[row][0]) {
-            col = 1;
+            incompleteCol = 1;
             completeSet = setIndices[row][0];
             incompleteSet = setIndices[row][1];
         } else {
-            col = 0;
+            incompleteCol = 0;
             completeSet = setIndices[row][1];
             incompleteSet = setIndices[row][0];
         }
         
-        System.out.println("row: " + row + ", Incomplete col: " + col);
+        // test print statements
+        System.out.println("row: " + row + ", Incomplete col: " + incompleteCol);
         System.out.print("Complete set: ");
         for (int i : completeSet) {
             System.out.print(i + " ");
@@ -103,8 +113,40 @@ public class TeamJAPRollin extends Rollin {
             System.out.print(i + " ");
         }
         System.out.println();
+        
+        // initialise count array
+        for(int i = 0; i < incompleteSet.length; i++){
+            count[dice[incompleteSet[i]]]++;
+        }
+        
+        // test print statements - count array
+        System.out.print("count array: ");
+        for (int i = 0; i < count.length; i++) {
+            System.out.println("dice: " + i + " count: " + count[i]);
+        }
+        System.out.println();
 
         return 0;
+    }
+    
+    private int closeEndedCase(int roll, int[] incompleteSet, int[] count) {
+        int replaceIndex = 0;
+        int[] replaceArray = new int[3];
+        if (count[1] == 1) {
+            
+            for (int i = 0; i < 3; i++) {
+                replaceArray[i] =
+            }
+            replaceIndex = 0;
+            replaceArray[0] = roll;
+            replaceArray[1] = dice[incompleteSet[1]];
+            replaceArray[2] = dice[incompleteSet[2]];
+            if (isSet(replaceArray)) {
+                dice[incompleteSet[replaceIndex]] = roll;
+                return incompleteSet[replaceIndex];
+            }
+            
+        }
     }
 
 }
