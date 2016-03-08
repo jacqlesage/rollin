@@ -40,11 +40,8 @@ public class RollinEtude2 {
         System.out.println(d);
         }
         
-        int roll = rn.nextInt(6-1 +1)+1;
-
-        replaceIndex = tjr.handleRoll(roll);            
+        int roll = rn.nextInt(6-1 +1)+1;        
          
-
         replaceIndex = tjr.handleRoll(roll);
         System.out.println("replace index: " + replaceIndex);
 
