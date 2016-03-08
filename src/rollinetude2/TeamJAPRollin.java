@@ -101,7 +101,8 @@ public class TeamJAPRollin extends Rollin {
         int row = 0;
         int incompleteCol = 0;
         int[] count = new int[7];
-
+     
+        System.out.println("Roll " + roll);
         // find which rows have sets
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 2; j++) {
@@ -161,10 +162,16 @@ public class TeamJAPRollin extends Rollin {
 //        for (int i = 0; i < 3; i++) {
 //            if (count[])
 //        } 
-            
-        if (count[1] == 1 || count[6] == 1) {
-            return closeEndedCase(roll, incompleteSet, count);
+ /*
+        if ( >= 0 || .. < 6) {
+            return isSetofTwo(incompleteSet);
         }
+        */
+         isSetOfTwo(roll, incompleteSet);
+         
+//        if (count[1] == 1 || count[6] == 1) {
+//            return closeEndedCase(roll, incompleteSet, count);
+//        }
 
         return -1;
     }
@@ -204,6 +211,40 @@ public class TeamJAPRollin extends Rollin {
         
         int max = Math.max(a, Math.max(b, c));
         int min = Math.min(a, Math.min(b, c));
-        return -1;        
+        return -1;
+    }
+    
+    private boolean isSetOfTwo(int roll,int[] indices) {
+        // First just get the values at those indices to save typing.
+        boolean tOrF = false;
+        int a = dice[indices[0]];
+        int b = dice[indices[1]];
+        int c = dice[indices[2]];
+        //temp hold 
+        int numberToReplace = roll;
+       
+        // If not all three are the same, then any two the same is not a set
+        if (a == b || a == c || b == c) {
+            System.out.println("two sets the same");
+            if (a == b){
+                dice[indices[2]] = numberToReplace;
+                System.out.println("C "+ c + "indexToreplace " + numberToReplace);
+                System.out.println("dice at index2 " + dice[indices[2]]);
+            }else if(a == c){
+                dice[indices[1]] = numberToReplace;
+            System.out.println("B " + b + "indexToreplace " + numberToReplace );
+            System.out.println("dice at index 1 " + dice[indices[1]]);
+            }else if (b == c){
+                dice[indices[0]] = numberToReplace;
+                System.out.println("A " + a + "indexToreplace " + numberToReplace);
+                System.out.println("dice at index 0 " + dice[indices[0]]);
+            }
+            
+           //need to handle case of 
+            //System.out.println("dice at index0 " + dice[indices[0]]);
+            tOrF = true;
+        }
+              
+        return tOrF;
     }
 }
