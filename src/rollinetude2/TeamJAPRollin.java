@@ -101,6 +101,7 @@ public class TeamJAPRollin extends Rollin {
         int row = 0;
         int incompleteCol = 0;
         int[] count = new int[7];
+        int replaceIndex;
      
         // find which rows have sets
         for (int i = 0; i < 9; i++) {
@@ -161,16 +162,15 @@ public class TeamJAPRollin extends Rollin {
 //        for (int i = 0; i < 3; i++) {
 //            if (count[])
 //        } 
- /*
-        if ( >= 0 || .. < 6) {
-            return isSetofTwo(incompleteSet);
+
+        replaceIndex = isSetOfTwo(roll, incompleteSet);
+        if (replaceIndex != -1) {
+            return replaceIndex;
         }
-        */
-         isSetOfTwo(roll, incompleteSet);
          
-//        if (count[1] == 1 || count[6] == 1) {
-//            return closeEndedCase(roll, incompleteSet, count);
-//        }
+        if (count[1] == 1 || count[6] == 1) {
+            return closeEndedCase(roll, incompleteSet, count);
+        }
 
         return -1;
     }
@@ -209,7 +209,7 @@ public class TeamJAPRollin extends Rollin {
         return -1;
     }
     
-    private boolean isSetOfTwo(int roll,int[] indices) {
+    private int isSetOfTwo(int roll,int[] indices) {
         // First just get the values at those indices to save typing.
         boolean tOrF = false;
         int a = dice[indices[0]];
@@ -225,14 +225,17 @@ public class TeamJAPRollin extends Rollin {
                 dice[indices[2]] = numberToReplace;
                 System.out.println("C "+ c + "indexToreplace " + numberToReplace);
                 System.out.println("dice at index2 " + dice[indices[2]]);
+                return indices[2];
             }else if(a == c){
                 dice[indices[1]] = numberToReplace;
-            System.out.println("B " + b + "indexToreplace " + numberToReplace );
-            System.out.println("dice at index 1 " + dice[indices[1]]);
+                System.out.println("B " + b + "indexToreplace " + numberToReplace );
+                System.out.println("dice at index 1 " + dice[indices[1]]);
+                return indices[1];
             }else if (b == c){
                 dice[indices[0]] = numberToReplace;
                 System.out.println("A " + a + "indexToreplace " + numberToReplace);
                 System.out.println("dice at index 0 " + dice[indices[0]]);
+                return indices[0];
             }
             
            //need to handle case of 
@@ -240,6 +243,6 @@ public class TeamJAPRollin extends Rollin {
             tOrF = true;
         }
               
-        return tOrF;
+        return -1;
     }
 }
